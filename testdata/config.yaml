@@ -1,0 +1,43 @@
+---
+server_url: http://0.0.0.0:8080
+listen_addr: 0.0.0.0:8080
+metrics_listen_addr: 0.0.0.0:9090
+grpc_listen_addr: 0.0.0.0:50443
+grpc_allow_insecure: true
+
+private_key_path: /var/run/headscale/private.key
+noise:
+  private_key_path: /var/run/headscale/noise_private.key
+
+ip_prefixes:
+  - fd7a:115c:a1e0::/48
+  - 100.64.0.0/10
+
+disable_check_updates: true
+
+derp:
+  server:
+    enabled: false
+
+  urls:
+    - https://controlplane.tailscale.com/derpmap/default
+
+db_type: sqlite3
+db_path: /var/run/headscale/db.sqlite
+
+log:
+  # Output formatting for logs: text or json
+  format: text
+  level: debug
+
+dns_config:
+  override_local_dns: true
+
+  nameservers:
+    - 1.1.1.1
+
+  magic_dns: true
+  base_domain: example.com
+
+unix_socket: /var/run/headscale/headscale.sock
+unix_socket_permission: "0770"
